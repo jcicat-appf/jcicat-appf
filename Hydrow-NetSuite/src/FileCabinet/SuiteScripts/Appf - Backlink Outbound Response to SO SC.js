@@ -1,4 +1,6 @@
 {
+    //test change in backlink script
+
     // Integration Logs
     var INTEGLOG_RECTYPE = 'customrecord_appf_integration_logs';
     var INTEGLOG_FLD_MESSAGE = 'custrecord_appf_log_message_content';
