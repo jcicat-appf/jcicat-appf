@@ -1,0 +1,398 @@
+<scheduledscript scriptid="customscript_appf_sc_inboundso">
+  <defaultfunction>schedule_inboundSO</defaultfunction>
+  <description>This script call&apos;s 3rd party&apos;s inbound orders API then convert each order to Integration Log.</description>
+  <isinactive>F</isinactive>
+  <name>4 - Appf - Inbound SO SC</name>
+  <notifyadmins>F</notifyadmins>
+  <notifyemails></notifyemails>
+  <notifyowner>T</notifyowner>
+  <scriptfile>[/SuiteScripts/Appf - Inbound SO SC.js]</scriptfile>
+  <scriptcustomfields>
+    <scriptcustomfield scriptid="custscript_appf_sparam_conconfigurator">
+      <accesslevel>2</accesslevel>
+      <applyformatting>F</applyformatting>
+      <checkspelling>F</checkspelling>
+      <defaultchecked>F</defaultchecked>
+      <defaultselection></defaultselection>
+      <defaultvalue></defaultvalue>
+      <description></description>
+      <displayheight></displayheight>
+      <displaytype>NORMAL</displaytype>
+      <displaywidth></displaywidth>
+      <dynamicdefault></dynamicdefault>
+      <fieldtype>SELECT</fieldtype>
+      <help></help>
+      <isformula>F</isformula>
+      <ismandatory>T</ismandatory>
+      <label>Connection Configurator</label>
+      <linktext></linktext>
+      <maxlength></maxlength>
+      <maxvalue></maxvalue>
+      <minvalue></minvalue>
+      <onparentdelete>NO_ACTION</onparentdelete>
+      <searchlevel>2</searchlevel>
+      <selectrecordtype>[scriptid=customrecord_appf_config_connector]</selectrecordtype>
+      <setting></setting>
+      <storevalue>T</storevalue>
+    </scriptcustomfield>
+    <scriptcustomfield scriptid="custscript_appf_sparam_flowconfig">
+      <accesslevel>2</accesslevel>
+      <applyformatting>F</applyformatting>
+      <checkspelling>F</checkspelling>
+      <defaultchecked>F</defaultchecked>
+      <defaultselection></defaultselection>
+      <defaultvalue></defaultvalue>
+      <description></description>
+      <displayheight></displayheight>
+      <displaytype>NORMAL</displaytype>
+      <displaywidth></displaywidth>
+      <dynamicdefault></dynamicdefault>
+      <fieldtype>SELECT</fieldtype>
+      <help></help>
+      <isformula>F</isformula>
+      <ismandatory>T</ismandatory>
+      <label>Flow Configurator</label>
+      <linktext></linktext>
+      <maxlength></maxlength>
+      <maxvalue></maxvalue>
+      <minvalue></minvalue>
+      <onparentdelete>NO_ACTION</onparentdelete>
+      <searchlevel>2</searchlevel>
+      <selectrecordtype>[scriptid=customrecord_appf_config_flow]</selectrecordtype>
+      <setting></setting>
+      <storevalue>T</storevalue>
+      <customfieldfilters>
+        <customfieldfilter>
+          <fldcomparefield>[scriptid=customscript_appf_sc_inboundso.custscript_appf_sparam_conconfigurator]</fldcomparefield>
+          <fldfilter>[scriptid=customrecord_appf_config_flow.custrecord_appf_flow_system]</fldfilter>
+          <fldfilterchecked></fldfilterchecked>
+          <fldfiltercomparetype>EQ</fldfiltercomparetype>
+          <fldfilternotnull>F</fldfilternotnull>
+          <fldfilternull>F</fldfilternull>
+          <fldfiltersel></fldfiltersel>
+          <fldfilterval></fldfilterval>
+        </customfieldfilter>
+      </customfieldfilters>
+    </scriptcustomfield>
+    <scriptcustomfield scriptid="custscript_appf_sparam_scheduledscript">
+      <accesslevel>2</accesslevel>
+      <applyformatting>F</applyformatting>
+      <checkspelling>F</checkspelling>
+      <defaultchecked>F</defaultchecked>
+      <defaultselection></defaultselection>
+      <defaultvalue></defaultvalue>
+      <description></description>
+      <displayheight></displayheight>
+      <displaytype>NORMAL</displaytype>
+      <displaywidth></displaywidth>
+      <dynamicdefault></dynamicdefault>
+      <fieldtype>TEXT</fieldtype>
+      <help></help>
+      <isformula>F</isformula>
+      <ismandatory>T</ismandatory>
+      <label>Callback Scheduled Script</label>
+      <linktext></linktext>
+      <maxlength></maxlength>
+      <maxvalue></maxvalue>
+      <minvalue></minvalue>
+      <onparentdelete></onparentdelete>
+      <searchlevel>2</searchlevel>
+      <selectrecordtype></selectrecordtype>
+      <setting></setting>
+      <storevalue>T</storevalue>
+    </scriptcustomfield>
+    <scriptcustomfield scriptid="custscript_appf_sparam_scheduleddeploy">
+      <accesslevel>2</accesslevel>
+      <applyformatting>F</applyformatting>
+      <checkspelling>F</checkspelling>
+      <defaultchecked>F</defaultchecked>
+      <defaultselection></defaultselection>
+      <defaultvalue></defaultvalue>
+      <description></description>
+      <displayheight></displayheight>
+      <displaytype>NORMAL</displaytype>
+      <displaywidth></displaywidth>
+      <dynamicdefault></dynamicdefault>
+      <fieldtype>TEXT</fieldtype>
+      <help></help>
+      <isformula>F</isformula>
+      <ismandatory>T</ismandatory>
+      <label>Callback Scheduled Deployment</label>
+      <linktext></linktext>
+      <maxlength></maxlength>
+      <maxvalue></maxvalue>
+      <minvalue></minvalue>
+      <onparentdelete></onparentdelete>
+      <searchlevel>2</searchlevel>
+      <selectrecordtype></selectrecordtype>
+      <setting></setting>
+      <storevalue>T</storevalue>
+    </scriptcustomfield>
+    <scriptcustomfield scriptid="custscript_appf_sparam_inbounddate">
+      <accesslevel>2</accesslevel>
+      <applyformatting>F</applyformatting>
+      <checkspelling>F</checkspelling>
+      <defaultchecked>F</defaultchecked>
+      <defaultselection></defaultselection>
+      <defaultvalue></defaultvalue>
+      <description>For manual deployment, update this date to get records from this date. &#xd;
+&#xd;
+For scheduled daily deployment, leave it blank.</description>
+      <displayheight></displayheight>
+      <displaytype>NORMAL</displaytype>
+      <displaywidth></displaywidth>
+      <dynamicdefault></dynamicdefault>
+      <fieldtype>DATE</fieldtype>
+      <help>For manual deployment, update this date to get records from this date. &#xd;
+&#xd;
+For scheduled daily deployment, leave it blank.</help>
+      <isformula>F</isformula>
+      <ismandatory>F</ismandatory>
+      <label>Date  **Update for Manual Deployment**</label>
+      <linktext></linktext>
+      <maxlength></maxlength>
+      <maxvalue></maxvalue>
+      <minvalue></minvalue>
+      <onparentdelete></onparentdelete>
+      <searchlevel>2</searchlevel>
+      <selectrecordtype></selectrecordtype>
+      <setting></setting>
+      <storevalue>T</storevalue>
+    </scriptcustomfield>
+    <scriptcustomfield scriptid="custscript_appf_sparam_inbounddate_until">
+      <accesslevel>2</accesslevel>
+      <applyformatting>F</applyformatting>
+      <checkspelling>F</checkspelling>
+      <defaultchecked>F</defaultchecked>
+      <defaultselection></defaultselection>
+      <defaultvalue></defaultvalue>
+      <description>For manual deployment, update this date to get records until this date. &#xd;
+&#xd;
+For scheduled daily deployment, leave it blank.</description>
+      <displayheight></displayheight>
+      <displaytype>NORMAL</displaytype>
+      <displaywidth></displaywidth>
+      <dynamicdefault></dynamicdefault>
+      <fieldtype>DATE</fieldtype>
+      <help>For manual deployment, update this date to get records until this date. &#xd;
+&#xd;
+For scheduled daily deployment, leave it blank.</help>
+      <isformula>F</isformula>
+      <ismandatory>F</ismandatory>
+      <label>Date Until **Update for Manual Deployment**</label>
+      <linktext></linktext>
+      <maxlength></maxlength>
+      <maxvalue></maxvalue>
+      <minvalue></minvalue>
+      <onparentdelete></onparentdelete>
+      <searchlevel>2</searchlevel>
+      <selectrecordtype></selectrecordtype>
+      <setting></setting>
+      <storevalue>T</storevalue>
+    </scriptcustomfield>
+  </scriptcustomfields>
+  <scriptdeployments>
+    <scriptdeployment scriptid="customdeploy_appf_inbound_sc_superior_ca">
+      <custscript_appf_sparam_conconfigurator>[scriptid=customrecord_appf_config_connector.val_1518841_5405048_528]</custscript_appf_sparam_conconfigurator>
+      <custscript_appf_sparam_flowconfig>[scriptid=customrecord_appf_config_flow.val_1518842_5405048_792]</custscript_appf_sparam_flowconfig>
+      <custscript_appf_sparam_inbounddate></custscript_appf_sparam_inbounddate>
+      <custscript_appf_sparam_inbounddate_until></custscript_appf_sparam_inbounddate_until>
+      <custscript_appf_sparam_scheduleddeploy>customdeploy_appf_log2stag_sca</custscript_appf_sparam_scheduleddeploy>
+      <custscript_appf_sparam_scheduledscript>customscript_appf_sc_intlogtostaging</custscript_appf_sparam_scheduledscript>
+      <isdeployed>T</isdeployed>
+      <loglevel>DEBUG</loglevel>
+      <status>SCHEDULED</status>
+      <title>SCHEDULED: Appf - Inbound - Superior California</title>
+      <recurrence>
+        <daily>
+          <everyxdays>1</everyxdays>
+          <repeat></repeat>
+          <startdate>2021-06-15</startdate>
+          <starttime>02:30:00Z</starttime>
+        </daily>
+      </recurrence>
+    </scriptdeployment>
+    <scriptdeployment scriptid="customdeploy_appf_inbound_ssched_w2g">
+      <custscript_appf_sparam_conconfigurator>[scriptid=customrecord_appf_config_connector.val_1056627_5405048_323]</custscript_appf_sparam_conconfigurator>
+      <custscript_appf_sparam_flowconfig>[scriptid=customrecord_appf_config_flow.val_1131141_5405048_481]</custscript_appf_sparam_flowconfig>
+      <custscript_appf_sparam_inbounddate></custscript_appf_sparam_inbounddate>
+      <custscript_appf_sparam_inbounddate_until></custscript_appf_sparam_inbounddate_until>
+      <custscript_appf_sparam_scheduleddeploy>customdeploy_appf_log2stag_w2g</custscript_appf_sparam_scheduleddeploy>
+      <custscript_appf_sparam_scheduledscript>customscript_appf_sc_intlogtostaging</custscript_appf_sparam_scheduledscript>
+      <isdeployed>T</isdeployed>
+      <loglevel>DEBUG</loglevel>
+      <status>SCHEDULED</status>
+      <title>SCHEDULED: Appf - Inbound - Ware2Go</title>
+      <recurrence>
+        <daily>
+          <everyxdays>1</everyxdays>
+          <repeat></repeat>
+          <startdate>2021-05-16</startdate>
+          <starttime>10:00:00Z</starttime>
+        </daily>
+      </recurrence>
+    </scriptdeployment>
+    <scriptdeployment scriptid="customdeploy_appf_sc_inbound_superior_nv">
+      <custscript_appf_sparam_conconfigurator>[scriptid=customrecord_appf_config_connector.val_1366608_5405048_515]</custscript_appf_sparam_conconfigurator>
+      <custscript_appf_sparam_flowconfig>[scriptid=customrecord_appf_config_flow.val_1366681_5405048_265]</custscript_appf_sparam_flowconfig>
+      <custscript_appf_sparam_inbounddate>2021-12-13</custscript_appf_sparam_inbounddate>
+      <custscript_appf_sparam_inbounddate_until></custscript_appf_sparam_inbounddate_until>
+      <custscript_appf_sparam_scheduleddeploy>customdeploy_appf_log2stag_snv</custscript_appf_sparam_scheduleddeploy>
+      <custscript_appf_sparam_scheduledscript>customscript_appf_sc_intlogtostaging</custscript_appf_sparam_scheduledscript>
+      <isdeployed>T</isdeployed>
+      <loglevel>DEBUG</loglevel>
+      <status>NOTSCHEDULED</status>
+      <title>MANUAL: Appf - Inbound Superior NV</title>
+      <recurrence>
+        <single>
+          <repeat></repeat>
+          <startdate>2021-06-08</startdate>
+          <starttime>22:00:00Z</starttime>
+        </single>
+      </recurrence>
+    </scriptdeployment>
+    <scriptdeployment scriptid="customdeploy_appf_inbound_sc_superior_nv">
+      <custscript_appf_sparam_conconfigurator>[scriptid=customrecord_appf_config_connector.val_1366608_5405048_515]</custscript_appf_sparam_conconfigurator>
+      <custscript_appf_sparam_flowconfig>[scriptid=customrecord_appf_config_flow.val_1366681_5405048_265]</custscript_appf_sparam_flowconfig>
+      <custscript_appf_sparam_inbounddate></custscript_appf_sparam_inbounddate>
+      <custscript_appf_sparam_inbounddate_until></custscript_appf_sparam_inbounddate_until>
+      <custscript_appf_sparam_scheduleddeploy>customdeploy_appf_log2stag_snv</custscript_appf_sparam_scheduleddeploy>
+      <custscript_appf_sparam_scheduledscript>customscript_appf_sc_intlogtostaging</custscript_appf_sparam_scheduledscript>
+      <isdeployed>T</isdeployed>
+      <loglevel>DEBUG</loglevel>
+      <status>SCHEDULED</status>
+      <title>SCHEDULED: Appf - Inbound - Superior NV</title>
+      <recurrence>
+        <daily>
+          <everyxdays>1</everyxdays>
+          <repeat></repeat>
+          <startdate>2021-06-15</startdate>
+          <starttime>02:30:00Z</starttime>
+        </daily>
+      </recurrence>
+    </scriptdeployment>
+    <scriptdeployment scriptid="customdeploy_appf_sc_inbound_superior_tn">
+      <custscript_appf_sparam_conconfigurator>[scriptid=customrecord_appf_config_connector.val_1830133_5405048_853]</custscript_appf_sparam_conconfigurator>
+      <custscript_appf_sparam_flowconfig>[scriptid=customrecord_appf_config_flow.val_2042584_5405048_939]</custscript_appf_sparam_flowconfig>
+      <custscript_appf_sparam_inbounddate>2021-12-13</custscript_appf_sparam_inbounddate>
+      <custscript_appf_sparam_inbounddate_until></custscript_appf_sparam_inbounddate_until>
+      <custscript_appf_sparam_scheduleddeploy>customdeploy_appf_log2stag_snashville</custscript_appf_sparam_scheduleddeploy>
+      <custscript_appf_sparam_scheduledscript>customscript_appf_sc_intlogtostaging</custscript_appf_sparam_scheduledscript>
+      <isdeployed>T</isdeployed>
+      <loglevel>DEBUG</loglevel>
+      <status>NOTSCHEDULED</status>
+      <title>MANUAL: Appf - Inbound - Superior Nashville</title>
+      <recurrence>
+        <daily>
+          <everyxdays>1</everyxdays>
+          <repeat></repeat>
+          <startdate>2021-10-28</startdate>
+          <starttime>02:00:00Z</starttime>
+        </daily>
+      </recurrence>
+    </scriptdeployment>
+    <scriptdeployment scriptid="customdeploy_appf_sc_inboundso_ware2go">
+      <custscript_appf_sparam_conconfigurator>[scriptid=customrecord_appf_config_connector.val_1056627_5405048_323]</custscript_appf_sparam_conconfigurator>
+      <custscript_appf_sparam_flowconfig>[scriptid=customrecord_appf_config_flow.val_1131141_5405048_481]</custscript_appf_sparam_flowconfig>
+      <custscript_appf_sparam_inbounddate>2022-01-26</custscript_appf_sparam_inbounddate>
+      <custscript_appf_sparam_inbounddate_until>2022-01-26</custscript_appf_sparam_inbounddate_until>
+      <custscript_appf_sparam_scheduleddeploy>customdeploy_appf_log2stag_w2g</custscript_appf_sparam_scheduleddeploy>
+      <custscript_appf_sparam_scheduledscript>customscript_appf_sc_intlogtostaging</custscript_appf_sparam_scheduledscript>
+      <isdeployed>T</isdeployed>
+      <loglevel>DEBUG</loglevel>
+      <status>NOTSCHEDULED</status>
+      <title>MANUAL: Appf - Inbound Ware2Go</title>
+      <recurrence>
+        <single>
+          <repeat></repeat>
+          <startdate>2021-05-14</startdate>
+          <starttime>15:30:00Z</starttime>
+        </single>
+      </recurrence>
+    </scriptdeployment>
+    <scriptdeployment scriptid="customdeploy_appf_inbound_sc_superior_tn">
+      <custscript_appf_sparam_conconfigurator>[scriptid=customrecord_appf_config_connector.val_1830133_5405048_853]</custscript_appf_sparam_conconfigurator>
+      <custscript_appf_sparam_flowconfig>[scriptid=customrecord_appf_config_flow.val_2042584_5405048_939]</custscript_appf_sparam_flowconfig>
+      <custscript_appf_sparam_inbounddate></custscript_appf_sparam_inbounddate>
+      <custscript_appf_sparam_inbounddate_until></custscript_appf_sparam_inbounddate_until>
+      <custscript_appf_sparam_scheduleddeploy>customdeploy_appf_log2stag_snashville</custscript_appf_sparam_scheduleddeploy>
+      <custscript_appf_sparam_scheduledscript>customscript_appf_sc_intlogtostaging</custscript_appf_sparam_scheduledscript>
+      <isdeployed>T</isdeployed>
+      <loglevel>DEBUG</loglevel>
+      <status>SCHEDULED</status>
+      <title>SCHEDULED: Appf - Inbound - Superior Nashville</title>
+      <recurrence>
+        <daily>
+          <everyxdays>1</everyxdays>
+          <repeat></repeat>
+          <startdate>2021-10-28</startdate>
+          <starttime>02:00:00Z</starttime>
+        </daily>
+      </recurrence>
+    </scriptdeployment>
+    <scriptdeployment scriptid="customdeploy_appf_inbound_sc_superior_mn">
+      <custscript_appf_sparam_conconfigurator>[scriptid=customrecord_appf_config_connector.val_1056628_5405048_167]</custscript_appf_sparam_conconfigurator>
+      <custscript_appf_sparam_flowconfig>[scriptid=customrecord_appf_config_flow.val_1057206_5405048_888]</custscript_appf_sparam_flowconfig>
+      <custscript_appf_sparam_inbounddate></custscript_appf_sparam_inbounddate>
+      <custscript_appf_sparam_inbounddate_until></custscript_appf_sparam_inbounddate_until>
+      <custscript_appf_sparam_scheduleddeploy>customdeploy_appf_log2stag_smn</custscript_appf_sparam_scheduleddeploy>
+      <custscript_appf_sparam_scheduledscript>customscript_appf_sc_intlogtostaging</custscript_appf_sparam_scheduledscript>
+      <isdeployed>T</isdeployed>
+      <loglevel>DEBUG</loglevel>
+      <status>SCHEDULED</status>
+      <title>SCHEDULED: Appf - Inbound - Superior</title>
+      <recurrence>
+        <daily>
+          <everyxdays>1</everyxdays>
+          <repeat></repeat>
+          <startdate>2021-03-02</startdate>
+          <starttime>03:00:00Z</starttime>
+        </daily>
+      </recurrence>
+    </scriptdeployment>
+    <scriptdeployment scriptid="customdeploy_appf_sc_inbound_superior_ca">
+      <custscript_appf_sparam_conconfigurator>[scriptid=customrecord_appf_config_connector.val_1518841_5405048_528]</custscript_appf_sparam_conconfigurator>
+      <custscript_appf_sparam_flowconfig>[scriptid=customrecord_appf_config_flow.val_1518842_5405048_792]</custscript_appf_sparam_flowconfig>
+      <custscript_appf_sparam_inbounddate>2021-12-13</custscript_appf_sparam_inbounddate>
+      <custscript_appf_sparam_inbounddate_until></custscript_appf_sparam_inbounddate_until>
+      <custscript_appf_sparam_scheduleddeploy>customdeploy_appf_log2stag_sca</custscript_appf_sparam_scheduleddeploy>
+      <custscript_appf_sparam_scheduledscript>customscript_appf_sc_intlogtostaging</custscript_appf_sparam_scheduledscript>
+      <isdeployed>T</isdeployed>
+      <loglevel>DEBUG</loglevel>
+      <status>NOTSCHEDULED</status>
+      <title>MANUAL: Appf - Inbound - Superior California</title>
+      <recurrence>
+        <daily>
+          <everyxdays>1</everyxdays>
+          <repeat></repeat>
+          <startdate>2021-06-15</startdate>
+          <starttime>02:00:00Z</starttime>
+        </daily>
+      </recurrence>
+    </scriptdeployment>
+    <scriptdeployment scriptid="customdeploy_appf_sc_inboundso_superior">
+      <custscript_appf_sparam_conconfigurator>[scriptid=customrecord_appf_config_connector.val_1056628_5405048_167]</custscript_appf_sparam_conconfigurator>
+      <custscript_appf_sparam_flowconfig>[scriptid=customrecord_appf_config_flow.val_1057206_5405048_888]</custscript_appf_sparam_flowconfig>
+      <custscript_appf_sparam_inbounddate>2021-12-13</custscript_appf_sparam_inbounddate>
+      <custscript_appf_sparam_inbounddate_until></custscript_appf_sparam_inbounddate_until>
+      <custscript_appf_sparam_scheduleddeploy>customdeploy_appf_log2stag_smn</custscript_appf_sparam_scheduleddeploy>
+      <custscript_appf_sparam_scheduledscript>customscript_appf_sc_intlogtostaging</custscript_appf_sparam_scheduledscript>
+      <isdeployed>T</isdeployed>
+      <loglevel>DEBUG</loglevel>
+      <status>NOTSCHEDULED</status>
+      <title>MANUAL: Appf - Inbound Superior</title>
+      <recurrence>
+        <single>
+          <repeat></repeat>
+          <startdate>2021-03-01</startdate>
+          <starttime>23:00:00Z</starttime>
+        </single>
+      </recurrence>
+    </scriptdeployment>
+  </scriptdeployments>
+  <libraries>
+    <library>
+      <scriptfile>[/SuiteScripts/webpack.base64.js]</scriptfile>
+    </library>
+  </libraries>
+</scheduledscript>

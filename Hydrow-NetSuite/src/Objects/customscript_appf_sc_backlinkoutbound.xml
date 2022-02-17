@@ -1,0 +1,85 @@
+<scheduledscript scriptid="customscript_appf_sc_backlinkoutbound">
+  <defaultfunction>schedule_backlinkOutboundResponse</defaultfunction>
+  <description>This is the script that processes the response from the 3rd party in the Integration Log and aims to apply the response mapping configured. &#xd;
+&#xd;
+Ultimately, this script aims to parse the response and backlink to the line (by using 3pl_order_id) as to which each integration log is created from.</description>
+  <isinactive>F</isinactive>
+  <name>3- Appf - Backlink Outbound Response SC</name>
+  <notifyadmins>F</notifyadmins>
+  <notifyemails></notifyemails>
+  <notifyowner>T</notifyowner>
+  <scriptfile>[/SuiteScripts/Appf - Backlink Outbound Response to SO SC.js]</scriptfile>
+  <scriptcustomfields>
+    <scriptcustomfield scriptid="custscript_appf_sparam_backlinkob_ss">
+      <accesslevel>2</accesslevel>
+      <applyformatting>F</applyformatting>
+      <checkspelling>F</checkspelling>
+      <defaultchecked>F</defaultchecked>
+      <defaultselection></defaultselection>
+      <defaultvalue></defaultvalue>
+      <description></description>
+      <displayheight></displayheight>
+      <displaytype>NORMAL</displaytype>
+      <displaywidth></displaywidth>
+      <dynamicdefault></dynamicdefault>
+      <fieldtype>SELECT</fieldtype>
+      <help></help>
+      <isformula>F</isformula>
+      <ismandatory>F</ismandatory>
+      <label>Backlink Saved Search</label>
+      <linktext></linktext>
+      <maxlength></maxlength>
+      <maxvalue></maxvalue>
+      <minvalue></minvalue>
+      <onparentdelete>NO_ACTION</onparentdelete>
+      <searchlevel>2</searchlevel>
+      <selectrecordtype>-119</selectrecordtype>
+      <setting></setting>
+      <storevalue>T</storevalue>
+    </scriptcustomfield>
+    <scriptcustomfield scriptid="custscript_appf_sparam_backlinkob_flow">
+      <accesslevel>2</accesslevel>
+      <applyformatting>F</applyformatting>
+      <checkspelling>F</checkspelling>
+      <defaultchecked>F</defaultchecked>
+      <defaultselection></defaultselection>
+      <defaultvalue></defaultvalue>
+      <description></description>
+      <displayheight></displayheight>
+      <displaytype>NORMAL</displaytype>
+      <displaywidth></displaywidth>
+      <dynamicdefault></dynamicdefault>
+      <fieldtype>SELECT</fieldtype>
+      <help></help>
+      <isformula>F</isformula>
+      <ismandatory>F</ismandatory>
+      <label>Backlink Flow Configurator</label>
+      <linktext></linktext>
+      <maxlength></maxlength>
+      <maxvalue></maxvalue>
+      <minvalue></minvalue>
+      <onparentdelete>NO_ACTION</onparentdelete>
+      <searchlevel>2</searchlevel>
+      <selectrecordtype>[scriptid=customrecord_appf_config_flow]</selectrecordtype>
+      <setting></setting>
+      <storevalue>T</storevalue>
+    </scriptcustomfield>
+  </scriptcustomfields>
+  <scriptdeployments>
+    <scriptdeployment scriptid="customdeploy_appf_sc_backlink_w2g">
+      <custscript_appf_sparam_backlinkob_flow>[scriptid=customrecord_appf_config_flow.val_1830068_5405048_554]</custscript_appf_sparam_backlinkob_flow>
+      <custscript_appf_sparam_backlinkob_ss>[scriptid=customsearch_appf_ss_outboundbacklink_2]</custscript_appf_sparam_backlinkob_ss>
+      <isdeployed>T</isdeployed>
+      <loglevel>DEBUG</loglevel>
+      <status>NOTSCHEDULED</status>
+      <title>3- Appf - Backlink Outbound Response SC</title>
+      <recurrence>
+        <single>
+          <repeat></repeat>
+          <startdate>2021-10-01</startdate>
+          <starttime>22:00:00Z</starttime>
+        </single>
+      </recurrence>
+    </scriptdeployment>
+  </scriptdeployments>
+</scheduledscript>
